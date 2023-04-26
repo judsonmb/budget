@@ -20,7 +20,7 @@ class Browser extends Model
     ];
 
     /**
-     * The roles that belong to the user.
+     * The web projects that belong to the browser.
      */
     public function webProjects(): BelongsToMany
     {

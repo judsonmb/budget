@@ -23,7 +23,7 @@ class DesktopProject extends Model
     ];
 
     /**
-     * Get the user that owns the phone.
+     * Get the customer that owns the desktop project.
      */
     public function customer(): BelongsTo
     {

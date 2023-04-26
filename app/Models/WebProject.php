@@ -23,7 +23,7 @@ class WebProject extends Model
     ];
 
     /**
-     * Get the user that owns the phone.
+     * Get the customer that owns the web project.
      */
     public function customer(): BelongsTo
     {
@@ -31,7 +31,7 @@ class WebProject extends Model
     }
 
     /**
-     * The roles that belong to the user.
+     * The browsers that belong to the web project.
      */
     public function browsers(): BelongsToMany
     {

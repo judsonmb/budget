@@ -23,7 +23,7 @@ class Customer extends Model
     ];
 
     /**
-     * Get the comments for the blog post.
+     * Get the web projects for the customer.
      */
     public function webProjects(): HasMany
     {
@@ -31,7 +31,7 @@ class Customer extends Model
     }
 
      /**
-     * Get the comments for the blog post.
+     * Get the mobile projects for customer.
      */
     public function mobileProjects(): HasMany
     {
@@ -39,7 +39,7 @@ class Customer extends Model
     }
 
     /**
-     * Get the comments for the blog post.
+     * Get the desktop projects for the customer.
      */
     public function desktopProjects(): HasMany
     {

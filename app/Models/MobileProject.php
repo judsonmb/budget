@@ -23,7 +23,7 @@ class MobileProject extends Model
     ];
 
     /**
-     * Get the user that owns the phone.
+     * Get the customer that owns the mobile project.
      */
     public function customer(): BelongsTo
     {
