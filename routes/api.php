@@ -19,3 +19,5 @@ use App\Http\Controllers\BudgetController;
 Route::get('/browsers', [BrowserController::class, 'getBrowsers']);
 
 Route::post('/budget/step/one', [BudgetController::class, 'storeStepOne']);
+
+Route::post('/budget/step/two', [BudgetController::class, 'storeStepTwo']);
