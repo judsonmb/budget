@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrowserController;
+use App\Http\Controllers\BudgetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,5 @@ use App\Http\Controllers\BrowserController;
 */
 
 Route::get('/browsers', [BrowserController::class, 'getBrowsers']);
+
+Route::post('/budget/step/one', [BudgetController::class, 'storeStepOne']);
