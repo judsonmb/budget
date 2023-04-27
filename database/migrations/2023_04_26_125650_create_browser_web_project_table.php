@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('web_project_browser', function (Blueprint $table) {
+        Schema::create('browser_web_project', function (Blueprint $table) {
             $table->id();
             $table->foreignId('web_project_id');
             $table->foreignId('browser_id');
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('web_project_browser');
+        Schema::dropIfExists('browser_web_project');
     }
 };
