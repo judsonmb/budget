@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Customer;
+use App\Http\Resources\CustomerResource;
 
 class CustomerService 
 {
@@ -15,5 +16,15 @@ class CustomerService
         $customer->address = $data['address'];
         $customer->save();
         return $customer;
+    }
+
+    public function getCustomers()
+    {
+        return CustomerResource::collection(
+                    Customer::with('webProjects')
+                                ->with('mobileProjects')
+                                ->with('desktopProjects')
+                                ->get()
+                    );
     }
 }
