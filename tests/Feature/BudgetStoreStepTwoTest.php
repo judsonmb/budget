@@ -102,7 +102,7 @@ class BudgetStoreStepTwoTest extends TestCase
 
         Mail::assertSent(CustomerStoredEmail::class, function ($mail) use ($customer) {
             return $mail->hasTo($customer['email']) &&
-                   $mail->hasFrom(env('MAIL_FROM_ADDRESS'));
+                   $mail->hasFrom(config('mail.from.address'));
         });
     }
 

@@ -28,7 +28,7 @@ class CustomerStoredEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('judsonmelobandeira@gmail.com', 'Judson Bandeira - Budget'),
+            from: new Address(config('mail.from.address'), config('mail.from.name')),
             subject: 'Seu projeto foi cadastrado!',
         );
     }
