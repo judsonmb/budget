@@ -21,7 +21,7 @@ class WebProjectFactory extends Factory
             'pages_number' => fake()->numberBetween(1, 10),
             'has_login' => fake()->randomElement([0,1]),
             'has_payment' => fake()->randomElement([0,1]),
-            'customer_id' => (string) Customer::inRandomOrder()->first()->id
+            //'customer_id' => (string) Customer::inRandomOrder()->first()->id
         ];
     }
 }
