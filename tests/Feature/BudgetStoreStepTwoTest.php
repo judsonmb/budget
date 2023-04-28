@@ -37,8 +37,8 @@ class BudgetStoreStepTwoTest extends TestCase
             'address' => $customer['address'],
         ]);
 
-        $latestCustomerId = \App\Models\Customer::latest()->first()->id;
-        $latestProjectId = \App\Models\WebProject::latest()->first()->id;
+        $latestCustomerId = \App\Models\Customer::latest()->get()[0]->id;
+        $latestProjectId = \App\Models\WebProject::latest()->get()[0]->id;
 
         $this->assertDatabaseHas('web_projects', [
             'pages_number' => $project['pages_number'],
@@ -59,7 +59,7 @@ class BudgetStoreStepTwoTest extends TestCase
 
         Mail::assertSent(CustomerStoredEmail::class, function ($mail) use ($customer) {
             return $mail->hasTo($customer['email']) &&
-                   $mail->hasFrom('judsonmelobandeira@gmail.com');
+                   $mail->hasFrom(env('MAIL_FROM_ADDRESS'));
         });
     }
 
@@ -90,7 +90,7 @@ class BudgetStoreStepTwoTest extends TestCase
             'address' => $customer['address'],
         ]);
 
-        $latestCustomerId = \App\Models\Customer::latest()->first()->id;
+        $latestCustomerId = \App\Models\Customer::latest()->get()[0]->id;
 
         $this->assertDatabaseHas('mobile_projects', [
             'platform' => $project['platform'],
@@ -102,7 +102,7 @@ class BudgetStoreStepTwoTest extends TestCase
 
         Mail::assertSent(CustomerStoredEmail::class, function ($mail) use ($customer) {
             return $mail->hasTo($customer['email']) &&
-                   $mail->hasFrom('judsonmelobandeira@gmail.com');
+                   $mail->hasFrom(env('MAIL_FROM_ADDRESS'));
         });
     }
 
@@ -133,7 +133,7 @@ class BudgetStoreStepTwoTest extends TestCase
             'address' => $customer['address'],
         ]);
 
-        $latestCustomerId = \App\Models\Customer::latest()->first()->id;
+        $latestCustomerId = \App\Models\Customer::latest()->get()[0]->id;
 
         $this->assertDatabaseHas('desktop_projects', [
             'supported_os' => $project['supported_os'],
@@ -145,7 +145,7 @@ class BudgetStoreStepTwoTest extends TestCase
 
         Mail::assertSent(CustomerStoredEmail::class, function ($mail) use ($customer) {
             return $mail->hasTo($customer['email']) &&
-                   $mail->hasFrom('judsonmelobandeira@gmail.com');
+                   $mail->hasFrom(env('MAIL_FROM_ADDRESS'));
         });
     }
 
