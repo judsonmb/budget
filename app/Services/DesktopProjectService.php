@@ -14,6 +14,7 @@ class DesktopProjectService
         $desktopProject->supports_prints = $data['supports_prints'];
         $desktopProject->access_license = $data['access_license'];
         $desktopProject->customer_id = $customerId;
+        $desktopProject->save();
         return $desktopProject;
     }
 }

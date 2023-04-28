@@ -10,7 +10,7 @@ use App\Mail\CustomerStoredEmail;
 
 class BudgetStoreStepTwoTest extends TestCase
 {
-    public function testBudgetStoreStepTwoSuccess(): void
+    public function testBudgetStoreStepTwoWebProjectSuccess(): void
     {
         Mail::fake();
 
@@ -29,6 +29,119 @@ class BudgetStoreStepTwoTest extends TestCase
         $response->assertStatus(200);
 
         $response->assertJson(['message' => 'Saved successfully!']);
+
+        $this->assertDatabaseHas('customers', [
+            'name' => $customer['name'],
+            'email' => $customer['email'],
+            'phone' => $customer['phone'],
+            'address' => $customer['address'],
+        ]);
+
+        $latestCustomerId = \App\Models\Customer::latest()->first()->id;
+        $latestProjectId = \App\Models\WebProject::latest()->first()->id;
+
+        $this->assertDatabaseHas('web_projects', [
+            'pages_number' => $project['pages_number'],
+            'has_login' => $project['has_login'],
+            'has_payment' => $project['has_payment'],
+            'customer_id' => $latestCustomerId,
+        ]);
+
+        $this->assertDatabaseHas('browser_web_project', [
+            'web_project_id' => $latestProjectId,
+            'browser_id' => 1,
+        ]);
+
+        $this->assertDatabaseHas('browser_web_project', [
+            'web_project_id' => $latestProjectId,
+            'browser_id' => 2,
+        ]);
+
+        Mail::assertSent(CustomerStoredEmail::class, function ($mail) use ($customer) {
+            return $mail->hasTo($customer['email']) &&
+                   $mail->hasFrom('judsonmelobandeira@gmail.com');
+        });
+    }
+
+    public function testBudgetStoreStepTwoMobileProjectSuccess(): void
+    {
+        Mail::fake();
+
+        $body = ['type' => 'mobile'];
+
+        $customer = \App\Models\Customer::factory()->make()->toArray();
+
+        $project = \App\Models\MobileProject::factory()->make()->toArray();
+
+        $body = array_merge($customer, $body, $project);
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+        ])->post('/api/budget/step/two', $body);
+
+        $response->assertStatus(200);
+
+        $response->assertJson(['message' => 'Saved successfully!']);
+
+        $this->assertDatabaseHas('customers', [
+            'name' => $customer['name'],
+            'email' => $customer['email'],
+            'phone' => $customer['phone'],
+            'address' => $customer['address'],
+        ]);
+
+        $latestCustomerId = \App\Models\Customer::latest()->first()->id;
+
+        $this->assertDatabaseHas('mobile_projects', [
+            'platform' => $project['platform'],
+            'screens_number' => $project['screens_number'],
+            'has_login' => $project['has_login'],
+            'has_payment' => $project['has_payment'],
+            'customer_id' => $latestCustomerId,
+        ]);
+
+        Mail::assertSent(CustomerStoredEmail::class, function ($mail) use ($customer) {
+            return $mail->hasTo($customer['email']) &&
+                   $mail->hasFrom('judsonmelobandeira@gmail.com');
+        });
+    }
+
+    public function testBudgetStoreStepTwoDesktopProjectSuccess(): void
+    {
+        Mail::fake();
+
+        $body = ['type' => 'desktop'];
+
+        $customer = \App\Models\Customer::factory()->make()->toArray();
+
+        $project = \App\Models\DesktopProject::factory()->make()->toArray();
+
+        $body = array_merge($customer, $body, $project);
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+        ])->post('/api/budget/step/two', $body);
+
+        $response->assertStatus(200);
+
+        $response->assertJson(['message' => 'Saved successfully!']);
+
+        $this->assertDatabaseHas('customers', [
+            'name' => $customer['name'],
+            'email' => $customer['email'],
+            'phone' => $customer['phone'],
+            'address' => $customer['address'],
+        ]);
+
+        $latestCustomerId = \App\Models\Customer::latest()->first()->id;
+
+        $this->assertDatabaseHas('desktop_projects', [
+            'supported_os' => $project['supported_os'],
+            'screens_number' => $project['screens_number'],
+            'supports_prints' => $project['supports_prints'],
+            'access_license' => $project['access_license'],
+            'customer_id' => $latestCustomerId,
+        ]);
 
         Mail::assertSent(CustomerStoredEmail::class, function ($mail) use ($customer) {
             return $mail->hasTo($customer['email']) &&
