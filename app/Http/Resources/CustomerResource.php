@@ -15,8 +15,8 @@ class CustomerResource extends JsonResource
     public function toArray(Request $request): array
     {
         $project = $this->webProjects;
-        if (empty($project)) {
-            if (empty($this->mobileProjects)) {
+        if (!count($project)) {
+            if (!count($this->mobileProjects)) {
                 $project = $this->desktopProjects;
             } else {
                 $project = $this->mobileProjects;
