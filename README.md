@@ -25,13 +25,17 @@
 - `MAIL_PASSWORD`
 - `MAIL_FROM_ADDRESS`
 
-### Rode a instalação das dependências.
+### rode a instalação das dependências.
 
 - `composer install`
 
-### Popule o banco com as tabelas e com os dados de browsers em seeders.
+### popule o banco com as tabelas e com os dados de browsers em seeders.
 
 - `php artisan migrate --seed`
+
+### para fazer testes com as rotas, acione o server.
+
+- `php artisan serve`
 
 ## Informações importantes: 
 
