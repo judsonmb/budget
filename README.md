@@ -1,5 +1,7 @@
 # Budget
 
+- Projeto em Laravel 10 para criação de orçamentos de software. Teste técnico da Winx.
+
 ## Requisitos para instalação
 
 - composer
